@@ -1,0 +1,45 @@
+<div class="container">
+  <!-- Page Heading -->
+  <div class="page-heading">
+    <h1 class="display-4">Our Product Gallery</h1>
+    <p class="lead">Browse through our collection of amazing products</p>
+  </div>
+
+  <!-- Product List -->
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor="let product of products">
+      <div class="card shadow-sm">
+        <img [src]="product.imageUrl" class="card-img-top" [alt]="product.name">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+
+          <!-- Size Selection -->
+          <div class="mb-3">
+            <label for="size-{{ product.name }}" class="form-label">Size:</label>
+            <select class="form-select" id="size-{{ product.name }}" #sizeSelector>
+              <option value="" disabled selected>Select a size</option>
+              <option *ngFor="let size of product.sizes" [value]="size">{{ size }}</option>
+            </select>
+          </div>
+
+          <!-- Color Selection -->
+          <div class="mb-3">
+            <label for="color-{{ product.name }}" class="form-label">Color:</label>
+            <select class="form-select" id="color-{{ product.name }}" #colorSelector>
+              <option value="" disabled selected>Select a color</option>
+              <option *ngFor="let color of product.colors" [value]="color">{{ color }}</option>
+            </select>
+          </div>
+
+          <!-- Add to Cart Button -->
+          <button
+            class="btn btn-success"
+            (click)="addToCart(product, sizeSelector.value, colorSelector.value)">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
